@@ -2,9 +2,9 @@
 
 ### Presets ###
 
-input_file_latest <- "C:/Users/jb000299/OneDrive - Defra/RESTRICTED_DL_FIF_Data_Folder/Data/Large Grants/FTF scheme data @02OCT2024.csv" # Filepath to latest data
+input_file_latest <- "C:/Users/jb000299/OneDrive - Defra/RESTRICTED_DL_FIF_Data_Folder/Data/Large Grants/FTF All theme data @07FEB2025.csv" # Filepath to latest data
 
-input_file_previous <- "C:/Users/jb000299/OneDrive - Defra/RESTRICTED_DL_FIF_Data_Folder/Data/Large Grants/FTF scheme data @28JUN2024.csv" # Filepath to previous data
+input_file_previous <- "C:/Users/jb000299/OneDrive - Defra/RESTRICTED_DL_FIF_Data_Folder/Data/Large Grants/FTF scheme data @02OCT2024.csv" # Filepath to previous data
 
 date_cols <- c("hardcopy_oa_received_date", "hardcopy_application_received_date", "date_of_oa_decision", "application_due_date", "full_application_appraisal_start_date", "fa_decision", "gfa_sent_date", "gfa_returned_date", "date_of_withdrawal")  # List all date columns
 
@@ -41,7 +41,7 @@ ftf_latest_summary <- ftf_raw_latest %>%
   summarise(count = n(), .groups = "drop") %>%                                                    # Count number in each grouping
   pivot_wider(names_from = application_stage, values_from = count, values_fill = list(count = 0)) # Convert count from a list to a table
 
-print(ftf_raw_latest_summary)
+print(ftf_latest_summary)
 
 
 
@@ -60,7 +60,7 @@ ftf_previous_summary <- ftf_raw_previous %>%
   summarise(count = n(), .groups = "drop") %>%                                                    # Count number in each grouping
   pivot_wider(names_from = application_stage, values_from = count, values_fill = list(count = 0)) # Convert count from a list to a table
 
-print(ftf_raw_previous_summary)
+print(ftf_previous_summary)
 
 
 
