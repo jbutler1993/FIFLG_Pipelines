@@ -19,9 +19,9 @@ usePackage <- function(p) # Function created that checks for library, installing
 }
 
 usePackage("dplyr")
-usePackage("readxl") # read_excel
+usePackage("readxl")  # read_excel
 usePackage("janitor") # snake_case
-
+usePackage("tidyr")   # table transpose
 
 
 
@@ -36,6 +36,18 @@ ftf_raw_latest <- read.csv(input_file_latest) %>%                           # Re
                   .fns = ~ as.Date(.x, format = "%d/%m/%Y")))               # Converts all date columns to date format  
 
 
+### Count of projects by Sub-Scheme
+
+ftf_latest_count <- ftf_raw_latest %>%
+  group_by(ftf_sub_scheme) %>%                                                
+  summarise(count = n())
+
+print(ftf_latest_count)
+
+
+### Count of projects by Sub-Scheme and Application Stage
+
+
 ftf_latest_summary <- ftf_raw_latest %>%
   group_by(ftf_sub_scheme, application_stage) %>%                                                 # Summarise by scheme and application stage
   summarise(count = n(), .groups = "drop") %>%                                                    # Count number in each grouping
@@ -44,15 +56,25 @@ ftf_latest_summary <- ftf_raw_latest %>%
 print(ftf_latest_summary)
 
 
-
-
-
 ### Load and clean previous data ###
 
 ftf_raw_previous <- read.csv(input_file_previous) %>%                         # Read in input file
                     clean_names() %>%                                         # Converts names to snake case
                     mutate(across(.cols = intersect(date_cols, colnames(.)),  # Only apply to columns that exist in the data
                                   .fns = ~ as.Date(.x, format = "%d/%m/%Y"))) # Converts all date columns to date format
+
+
+### Count of projects by Sub-Scheme
+
+
+ftf_previous_count <- ftf_raw_previous %>%
+  group_by(ftf_sub_scheme) %>%                                                
+  summarise(count = n())
+
+print(ftf_previous_count)
+
+
+### Count of projects by Sub-Scheme and Application Stage
 
 
 ftf_previous_summary <- ftf_raw_previous %>%
