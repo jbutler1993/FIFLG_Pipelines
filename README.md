@@ -10,6 +10,7 @@ A high-level count of projects by Application Stage and Sub-Scheme, comparing be
 - [ ] Load .csv files from SharePoint
 - [ ] Clean names
 - [ ] Convert date columns to date format
+- [ ] Group both extracts by Sub-Scheme and display totals
 - [ ] Group both extracts by Sub-Scheme and Application Stage
 - [ ] Calculate differences in grouped count across previous and latest data
 - [ ] Produce a summary table of changes to totals between extracts
