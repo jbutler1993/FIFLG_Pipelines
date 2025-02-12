@@ -4,7 +4,7 @@
 A high-level count of projects by Application Stage and Sub-Scheme, comparing between the latest and previous iterations.
 
 > [!NOTE]
-> Packages used: dplyr, readxl, janitor
+> Packages used: dplyr, janitor, readxl, tidyr
 
 ### Code Operations
 - [ ] Load .csv files from SharePoint
