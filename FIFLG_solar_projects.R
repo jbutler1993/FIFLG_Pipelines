@@ -34,7 +34,7 @@ ftf_raw_latest <- read.csv(input_file_latest) %>%                               
                 .fns = ~ as.Date(.x, format = "%d/%m/%Y")))                     # Converts all date columns to date format  
 
 
-### Recode the application status according to RPA methods
+### Recode the application status according to RPA methods - recode list from Grant Services
 
 ftf_raw_latest <- ftf_raw_latest %>%
   mutate (application_stage_recoded = case_when(
@@ -65,9 +65,9 @@ ftf_raw_latest <- ftf_raw_latest %>%
 ### Reduce dataset to Productivity Round Two applications
 
 ftf_prodr2_latest <- ftf_raw_latest %>%
-  filter(ftf_sub_scheme == "FTF-Productivity Round 2")                          # Filter by Sub-Scheme
+  filter(ftf_sub_scheme == "FTF-Productivity Round 2")                          # Filter by Sub-Scheme to Productivity Round Two
 
-ftf_prodr2_count <- ftf_prodr2_latest %>%
+ftf_prodr2_count <- ftf_prodr2_latest %>%                                       # Count number of applications
   summarise(count = n())
 
 print(ftf_prodr2_count)                                                         # Count number of applications - verify it's the correct amount
@@ -81,6 +81,6 @@ remove(ftf_prodr2_count)
 
 ### Pick out the Solar projects
 
-ftf_prodr2_solar <- ftf_prodr2_latest %>%
+ftf_prodr2_solar <- ftf_prodr2_latest %>%                                       # Search for applications containing Solar-specific phrases in their descriptions (not case sensitive) 
   filter(grepl("solar|battery|batteris|pv panel|pv panels|inverter|utility meter|grid connection|powerdiverter", description_of_project, ignore.case = TRUE)) %>%
-  filter(!is.na(hardcopy_application_received_date))
+  filter(!is.na(hardcopy_application_received_date))                            # Filter to applications that have a Full Application Received Date
