@@ -1,5 +1,7 @@
 # :floppy_disk: Files
 
+---
+
 ## [FIFLG_Solar Projects](https://github.com/jbutler1993/FIFLG_Pipelines/blob/main/FIFLG_solar_projects.R)
 A high-level count of projects by Application Stage and Sub-Scheme, comparing between the latest and previous iterations.
 
@@ -32,3 +34,5 @@ A high-level count of projects by Application Stage and Sub-Scheme, comparing be
 - [ ] Group both extracts by Sub-Scheme and Application Stage
 - [ ] Calculate differences in grouped count across previous and latest data
 - [ ] Produce a summary table of changes to totals between extracts
+
+---
