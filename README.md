@@ -3,7 +3,7 @@
 ---
 
 ## [FIFLG_Solar Projects](https://github.com/jbutler1993/FIFLG_Pipelines/blob/main/FIFLG_solar_projects.R)
-A high-level count of projects by Application Stage and Sub-Scheme, comparing between the latest and previous iterations.
+A high-level count of projects applying for Solar Items.
 
 > [!NOTE]
 > Packages used: dplyr, janitor, readxl
