@@ -9,6 +9,7 @@ A high-level count of projects by Application Stage and Sub-Scheme, comparing be
 ### Code Operations
 - [ ] Load .csv files from SharePoint
 - [ ] Clean names
+- [ ] Recode Application Stages to those used in the Defra Grants Service Performance Report methods
 - [ ] Convert date columns to date format
 - [ ] Group both extracts by Sub-Scheme and display totals
 - [ ] Group both extracts by Sub-Scheme and Application Stage
