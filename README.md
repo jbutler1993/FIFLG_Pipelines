@@ -2,6 +2,22 @@
 
 ---
 
+## [FIFLGAV_Evaluation_BLD_link](https://github.com/jbutler1993/FIFLG_Pipelines/blob/main/FIFLGAV_Evaluation_BLD_link.R)
+Linking the Adding Value beneficiaries to the Business Level Dataset to attach demographic data.
+
+> [!NOTE]
+> Packages used: dplyr, utils, janitor
+
+### Code Operations
+- [ ] Define Filepaths
+- [ ] Load Business Level Datatset, clean names, select and rename columns
+- [ ] Load Large Grants data, filter to Adding Value, select and rename columns, remove duplicate SBIs
+- [ ] Load beneficiaries, clean names and rename SBI column
+- [ ] Left join the datsets together by SBI
+- [ ] Export .csv
+
+---
+
 ## [FIFLG_Solar Projects](https://github.com/jbutler1993/FIFLG_Pipelines/blob/main/FIFLG_solar_projects.R)
 A high-level count of projects applying for Solar Items.
 
