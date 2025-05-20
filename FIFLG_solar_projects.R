@@ -2,7 +2,7 @@
 
 ### Presets ###
 
-input_file_latest <- "C:/Users/jb000299/OneDrive - Defra/RESTRICTED_DL_FIF_Data_Folder/Data/Large Grants/FTF All theme data @07FEB2025.csv" # Filepath to latest data
+input_file_latest <- "C:/Users/jb000299/OneDrive - Defra/RESTRICTED_DL_FIF_Data_Folder/Data/R-format/FIF large grants scheme data @15MAY2025.xlsx" # Filepath to latest data
 
 date_cols <- c("hardcopy_oa_received_date", "hardcopy_application_received_date", "date_of_oa_decision", "application_due_date", "full_application_appraisal_start_date", "fa_decision", "gfa_sent_date", "gfa_returned_date", "date_of_withdrawal")  # List all date columns
 
@@ -28,10 +28,8 @@ usePackage("tidyr")   # table transpose
 
 ### Load and clean latest data ###
 
-ftf_raw_latest <- read.csv(input_file_latest) %>%                               # Read in input file
-  clean_names() %>%                                                             # Converts names to snake case
-  mutate(across(.cols = intersect(date_cols, colnames(.)),                      # Only apply to columns that exist in the data
-                .fns = ~ as.Date(.x, format = "%d/%m/%Y")))                     # Converts all date columns to date format  
+ftf_raw_latest <- readxl::read_xlsx(input_file_latest) %>%                               # Read in input file
+  clean_names()
 
 
 ### Recode the application status according to RPA methods - recode list from Grant Services
@@ -41,6 +39,8 @@ ftf_raw_latest <- ftf_raw_latest %>%
     application_stage == "All Claims Rejected Project" ~ "FA Rejected",     
     application_stage == "Application Approved" ~ "FA Approved",         
     application_stage == "Application in appraisal " ~ "FA Outstanding", 
+    application_stage == "Application in appraisal" ~ "FA Outstanding",
+    application_stage == "Application in Appraisal " ~ "FA Outstanding",
     application_stage == "Application Received" ~ "FA Outstanding", 
     application_stage == "Application rejected" ~ "FA Rejected",
     application_stage == "Contracted" ~ "FA Approved",
@@ -52,6 +52,7 @@ ftf_raw_latest <- ftf_raw_latest %>%
     application_stage == "OA Received" ~ "OA Outstanding", 
     application_stage == "OA Rejected" ~ "OA Rejected", 
     application_stage == "OA withdrawn " ~ "OA Withdrawn", 
+    application_stage == "OA Withdrawn " ~ "OA Withdrawn",
     application_stage == "Project Closed" ~ "FA Approved", 
     application_stage == "Recovery" ~ "FA Approved", 
     application_stage == "Terminated (Project Never started)" ~ "FA Withdrawn", 
@@ -83,4 +84,4 @@ remove(ftf_prodr2_count)
 
 ftf_prodr2_solar <- ftf_prodr2_latest %>%                                       # Search for applications containing Solar-specific phrases in their descriptions (not case sensitive) 
   filter(grepl("solar|battery|batteris|pv panel|pv panels|inverter|utility meter|grid connection|powerdiverter", description_of_project, ignore.case = TRUE)) %>%
-  filter(!is.na(hardcopy_application_received_date))                            # Filter to applications that have a Full Application Received Date
+  filter(application_stage_recoded == "FA Approved")                            # Filter to applications that have a Full Application Received Date
